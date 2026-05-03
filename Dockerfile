@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 FROM python:3.12-alpine
 
 # Create working directory
@@ -31,45 +32,37 @@ EXPOSE 5000
 # Run application
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
 FROM python:3.11-slim AS builder
+=======
+FROM python:3.11-slim
+>>>>>>> 72992bc (Fixed checkout API, resolved tests, completed Week 2)
 
+# Set working directory
 WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y gcc && \
     rm -rf /var/lib/apt/lists/*
 
+# Copy requirements
 COPY requirements.txt .
-RUN pip install --user --no-cache-dir -r requirements.txt
 
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# -------- Final Stage --------
-FROM python:3.11-slim
+# Copy project files
+COPY . .
 
 # Create non-root user
-RUN useradd -m appuser
-
-WORKDIR /app
-
-# Copy dependencies
-COPY --from=builder /root/.local /home/appuser/.local
-
-# Copy app
-COPY --chown=appuser:appuser . .
-RUN mkdir -p /app/flask_session && chown -R appuser:appuser /app
-
-# Environment variables
-ENV PATH=/home/appuser/.local/bin:$PATH \
-    PYTHONUNBUFFERED=1 \
-    FLASK_APP=app.py \
-    FLASK_ENV=production
+RUN useradd -m appuser && chown -R appuser:appuser /app
 
 # Switch user
 USER appuser
 
-EXPOSE 5000
+# Environment variables
+ENV PYTHONUNBUFFERED=1
 
-# Health check (no external lib needed)
-HEALTHCHECK CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')" || exit 1
+# Expose port
+EXPOSE 5000
 
 # Run app
 CMD ["python", "app.py"]

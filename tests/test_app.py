@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import pytest
 from app import app
 
@@ -40,7 +39,7 @@ def test_add_to_cart(client):
     rv = client.get('/add-to-cart/1')
     assert rv.status_code == 200
     assert rv.json['success'] == True
-=======
+
 import pytest
 import sys
 import os
@@ -86,4 +85,3 @@ def test_checkout_empty_cart(client):
         sess['cart'] = {}
     response = client.post('/api/checkout')
     assert response.status_code == 400
->>>>>>> e7ad686 (Updated DevSecOps pipeline, Terraform IaC security fixes, Checkov improvements)
