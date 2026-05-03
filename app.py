@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from flask import Flask, render_template, jsonify, request, session, redirect, url_for, send_from_directory
 import os
 import logging
@@ -369,7 +368,6 @@ if __name__ == '__main__':
         port=port, 
         debug=debug_mode
     )
-=======
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from flask_session import Session
 import os
@@ -706,4 +704,3 @@ def place_order():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
->>>>>>> e7ad686 (Updated DevSecOps pipeline, Terraform IaC security fixes, Checkov improvements)
