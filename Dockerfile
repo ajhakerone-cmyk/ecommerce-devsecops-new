@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 FROM python:3.12-alpine
 
 # Create working directory
@@ -31,7 +30,6 @@ EXPOSE 5000
 
 # Run application
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
-=======
 FROM python:3.11-slim AS builder
 
 WORKDIR /app
@@ -75,4 +73,3 @@ HEALTHCHECK CMD python -c "import urllib.request; urllib.request.urlopen('http:/
 
 # Run app
 CMD ["python", "app.py"]
->>>>>>> e7ad686 (Updated DevSecOps pipeline, Terraform IaC security fixes, Checkov improvements)
