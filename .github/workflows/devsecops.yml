@@ -1,19 +1,36 @@
-name: Simple Pipeline
+name: DevSecOps Pipeline
 
-on: [push]
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
 
 jobs:
-  build-and-scan:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
+    
+    - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Build Docker Image
-      run: docker build -t myapp .
-
-    - name: Scan Docker Image (Trivy)
-      uses: aquasecurity/trivy-action@master
+    - name: Set up Python
+      uses: actions/setup-python@v4
       with:
-        image-ref: 'myapp'
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run Tests
+      run: |
+        PYTHONPATH=. pytest
+
+    - name: Run Bandit (SAST)
+      run: |
+        bandit -r . -x tests
+
+    - name: Run Safety (Dependency Check)
+      run: |
+        safety check || true
