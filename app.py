@@ -388,7 +388,6 @@ if __name__ == '__main__':
 )
 
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
-from flask_session import Session
 import os
 import json
 import secrets
@@ -400,14 +399,10 @@ app = Flask(__name__)
 
 # Security configurations
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', secrets.token_hex(32))
-app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SESSION_PERMANENT'] = False
-app.config['SESSION_USE_SIGNER'] = True
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SECURE'] = False
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
-Session(app)
 
 # Product Database
 PRODUCTS = {
