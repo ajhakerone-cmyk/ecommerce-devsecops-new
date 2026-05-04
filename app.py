@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, make_response
-=======
 from flask import Flask, render_template, jsonify, request, session, redirect, url_for, send_from_directory
 import os
 import logging
@@ -385,13 +383,11 @@ if __name__ == '__main__':
     logger.info(f"Environment: {os.environ.get('FLASK_ENV', 'production')}")
     
     app.run(
-        host='0.0.0.0', 
-        port=port, 
-        debug=debug_mode
-    )
+    host='0.0.0.0',
+    port=5000
+)
 
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
->>>>>>> 72992bc (Fixed checkout API, resolved tests, completed Week 2)
 from flask_session import Session
 import os
 import json
@@ -733,8 +729,4 @@ def place_order():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-<<<<<<< HEAD
-    app.run(host='0.0.0.0', port=5000, debug=True)
-=======
-    app.run(host='0.0.0.0', port=5000, debug=True)
->>>>>>> 72992bc (Fixed checkout API, resolved tests, completed Week 2)
+    app.run(host='0.0.0.0', port=5000, debug=False)

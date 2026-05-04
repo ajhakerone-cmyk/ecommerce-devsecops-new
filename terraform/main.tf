@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 terraform {
   required_version = ">= 1.0"
   required_providers {
@@ -129,7 +128,6 @@ data "aws_iam_policy_document" "ecommerce_assets" {
 }
 
 data "aws_caller_identity" "current" {}
-=======
 terraform {
   required_version = ">= 1.0"
 
@@ -335,4 +333,3 @@ egress {
 }
   tags = var.tags
 }
->>>>>>> e7ad686 (Updated DevSecOps pipeline, Terraform IaC security fixes, Checkov improvements)

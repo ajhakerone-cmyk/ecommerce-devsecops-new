@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 variable "aws_region" {
   description = "AWS region"
   type        = string
@@ -9,7 +8,6 @@ variable "environment" {
   description = "Environment name"
   type        = string
   default     = "dev"
-=======
 variable "aws_region" {
   description = "AWS region"
   type        = string
@@ -47,5 +45,4 @@ variable "tags" {
     ManagedBy   = "Terraform"
     SecurityScan = "Enabled"
   }
->>>>>>> e7ad686 (Updated DevSecOps pipeline, Terraform IaC security fixes, Checkov improvements)
 }
