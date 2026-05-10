@@ -10,18 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    
+
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.11'
 
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+        pip install bandit safety checkov pytest
 
     - name: Run Tests
       run: |
@@ -34,3 +35,18 @@ jobs:
     - name: Run Safety (Dependency Check)
       run: |
         safety check || true
+
+    - name: Build Docker Image
+      run: |
+        docker build -t ecommerce-app .
+
+    - name: Run Trivy Scan
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'ecommerce-app'
+        format: 'table'
+        exit-code: '0'
+
+    - name: Run Checkov Scan
+      run: |
+        checkov -d terraform/
