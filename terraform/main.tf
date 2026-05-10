@@ -15,6 +15,10 @@ provider "aws" {
 # S3 bucket for static assets
 resource "aws_s3_bucket" "ecommerce_assets" {
   bucket = "ecommerce-assets-${var.environment}-${data.aws_caller_identity.current.account_id}"
+
+versioning {
+  enabled = true
+}
   
   tags = {
     Name        = "E-commerce Assets"
