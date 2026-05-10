@@ -1,79 +1,138 @@
-# 🛒 Secure E-Commerce DevSecOps Pipeline
+# DevSecOps E-Commerce Project
 
-## 📌 Project Overview
+## Project Overview
 
-This project demonstrates a **secure E-Commerce web application** integrated with **DevSecOps practices**.
-It focuses on automating development, security testing, and deployment using modern tools.
+This project demonstrates a complete DevSecOps pipeline implementation for a secure e-commerce application using:
 
----
-
-## 🚀 Features
-
-* Product browsing and cart functionality
-* Secure Flask-based backend
-* Docker containerization
-* CI/CD pipeline using GitHub Actions
-* Integrated security scanning at every stage
+- Flask Application
+- Docker
+- GitHub Actions CI/CD
+- Trivy Security Scanning
+- Terraform Infrastructure as Code
+- Checkov IaC Security Scanning
 
 ---
 
-## 🛠️ Technologies Used
+# Week 1 - CI/CD Pipeline Setup
 
-* **Frontend:** HTML, CSS, JavaScript
-* **Backend:** Python (Flask)
-* **Containerization:** Docker
-* **CI/CD:** GitHub Actions
-* **Infrastructure as Code:** Terraform
+## Implemented Features
+
+- Flask-based e-commerce application
+- Docker containerization
+- GitHub Actions pipeline
+- Automated testing using Pytest
+
+## Technologies Used
+
+- Python
+- Flask
+- Docker
+- GitHub Actions
+- Pytest
 
 ---
 
-## 🔐 Security Tools Integrated
+# Week 2 - Container Security Scanning
 
-* **Bandit** → Static Code Analysis (SAST)
-* **Safety** → Dependency Check (SCA)
-* **Trivy** → Container Vulnerability Scan
-* **OWASP ZAP** → Dynamic Application Security Testing (DAST)
-* **Checkov** → Terraform (IaC) Security Scan
+## Implemented Features
+
+- Docker image vulnerability scanning
+- Trivy integration in CI/CD pipeline
+- Automated security scanning during builds
+
+## Security Tool
+
+- Trivy
+
+## Security Checks
+
+- OS package vulnerabilities
+- Dependency vulnerabilities
+- Container image scanning
 
 ---
 
-## 🐳 Docker Setup
+# Week 3 - Infrastructure as Code (IaC) Scanning
 
-### Build Image
+## Implemented Features
+
+- Terraform infrastructure configuration
+- AWS S3 bucket configuration
+- Checkov integration for IaC scanning
+- Detection of cloud misconfigurations
+
+## IaC Security Tool
+
+- Checkov
+
+## Misconfigurations Detected
+
+- Public S3 bucket access
+- Missing versioning
+- Missing encryption
+- Missing public access block
+
+---
+
+# Project Structure
 
 ```bash
-docker build -t ecommerce .
-```
-
-### Run Container
-
-```bash
-docker run -d -p 5000:5000 ecommerce
-```
-
-👉 Open in browser:
-
-```
-http://localhost:5000
+.
+├── app.py
+├── Dockerfile
+├── requirements.txt
+├── templates/
+├── tests/
+├── terraform/
+├── .github/
+│   └── workflows/
+│       └── devsecops.yml
+└── README.md
 ```
 
 ---
 
-## 🔍 Security Scanning Commands
+# Running the Application
 
-### OWASP ZAP Scan
-
-```bash
-docker run -t -v %cd%:/zap/wrk:rw zaproxy/zap-stable zap-baseline.py -t http://host.docker.internal:5000 -r zap_report.html
-```
-
-### Trivy Scan
+## Install Dependencies
 
 ```bash
-docker run --rm aquasec/trivy:latest image ecommerce
+pip install -r requirements.txt
 ```
 
-### Checkov Scan
+## Run Flask Application
+
+```bash
+python app.py
+```
+
+---
+
+# Running Tests
+
+```bash
+pytest
+```
+
+---
+
+# Build Docker Image
+
+```bash
+docker build -t ecommerce-app .
+```
+
+---
+
+# Run Trivy Scan
+
+```bash
+trivy image ecommerce-app
+```
+
+---
+
+# Run Checkov Scan
 
 ```bash
 checkov -d terraform/
@@ -81,56 +140,16 @@ checkov -d terraform/
 
 ---
 
-## 📂 Project Structure
+# CI/CD Pipeline Stages
 
-```
-ecommerce-dev/
-│
-├── templates/
-├── static/
-├── terraform/
-├── tests/
-├── .github/workflows/
-├── Dockerfile
-├── docker-compose.yml
-├── app.py
-└── requirements.txt
-```
+- Install Dependencies
+- Run Tests
+- Build Docker Image
+- Run Trivy Scan
+- Run Checkov Scan
 
 ---
 
-## 📊 DevSecOps Pipeline Flow
+# Author
 
-```
-Code → Build → Test → Security Scan → Deploy
-```
-
----
-
-## 📈 Output
-
-* Automated CI/CD pipeline
-* Security vulnerabilities detection
-* Containerized deployment
-* Infrastructure automation
-
----
-
-## 🎯 Conclusion
-
-This project demonstrates how **security can be integrated into the DevOps pipeline** to build secure, scalable, and reliable applications.
-
----
-
-## 👨‍💻 Author
-
-**Rinku Shamrao Dhole**
-MCA Student
-
----
-
-## ⭐ Acknowledgement
-
-This project was developed as part of internship training under **Codec Technologies**.
-
----
+Kuldeep Giri
