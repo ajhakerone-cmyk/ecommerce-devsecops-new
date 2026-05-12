@@ -12,25 +12,25 @@
 
 ## GitHub Actions Workflow
 
-![Workflow](./screenshots/workflow-file.png)
+
 
 ---
 
 ## Terraform Configuration
 
-![Terraform Config](./screenshots/terraform-config.png)
+
 
 ---
 
 ## GitHub Actions Runs
 
-![GitHub Actions](./screenshots/github-actions.png)
+
 
 ---
 
 ## Checkov Security Scan Results
 
-![Checkov Scan](./screenshots/checkov-scan.png)
+
 
 ---
 
