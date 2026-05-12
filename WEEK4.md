@@ -13,18 +13,18 @@
 ## Screenshots
 
 ### Docker Containers Running
-![Docker Containers]
+
 
 ### Prometheus Dashboard
-![Prometheus]
+
 
 ### Grafana Home
-![Grafana Home]
+
 ### Creating Dashboard
-![Grafana Dashboard]
+
 
 ### Terminal Output
-![Terminal Output]
+
 
 <img width="1600" height="732" alt="1000269442" src="https://github.com/user-attachments/assets/2bd432ab-e150-452d-9e71-e0ff873587ee" />
 <img width="1600" height="732" alt="1000269444" src="https://github.com/user-attachments/assets/c773873e-1906-4e51-9a3d-e5e0307bb4ec" />
