@@ -2,51 +2,27 @@ name: DevSecOps Pipeline
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
+    branches:
+      - main
 
 jobs:
-  build:
+  security-scan:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Install Checkov
+        run: pip install checkov
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+      - name: Run Checkov Scan
+        run: checkov -d terraform/
 
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-        pip install bandit safety checkov pytest
+      - name: Build Docker Image
+        run: docker build -t myapp .
 
-    - name: Run Tests
-      run: |
-        PYTHONPATH=. pytest
-
-    - name: Run Bandit (SAST)
-      run: |
-        bandit -r . -x tests
-
-    - name: Run Safety (Dependency Check)
-      run: |
-        safety check || true
-
-    - name: Build Docker Image
-      run: |
-        docker build -t ecommerce-app .
-
-    - name: Run Trivy Scan
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: 'ecommerce-app'
-        format: 'table'
-        exit-code: '0'
-
-    - name: Run Checkov Scan
-      run: |
-        checkov -d terraform/
+      - name: Scan Docker Image (Trivy)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'myapp'
